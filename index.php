@@ -2,17 +2,18 @@
 //adiciona os arquivos necessarios
 require_once("vendor/autoload.php");
 //cria uma nova aplicação do SLIM
-$app = new \Slim\Slim();
+use \Slim\Slim;
+use \Hcode\Page;
+
+$app = new Slim();
 //configura o modo debug para explicar cada erro
 $app->config('debug', true);
 //criando rota inicial
 $app->get('/', function() {
     
-	$sql = new Hcode\DB\Sql();
+	$page = new Page();
 
-	$results = $sql->select("SELECT * FROM tb_users");
-
-	echo json_encode($results);
+	$page->setTpl("index");
 
 });
 //manda executar a aplicação
